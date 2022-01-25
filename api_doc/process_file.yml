@@ -1,0 +1,19 @@
+API to process file using easy ocr
+
+---
+tags:
+- Process File
+consumes:
+- multipart/form-data
+parameters:
+- name: file
+  key: file
+  in: formData
+  type: file
+  required: true
+  description: File that has to be uploded and processed
+responses:
+  500:
+    description: Internal server failed.
+  200:
+    description: Uploaded and mapped successfully.
