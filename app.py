@@ -8,7 +8,7 @@ from flask import Flask, request, jsonify
 from flasgger import Swagger, swag_from
 from pdf2image import convert_from_path
 model_time = time.time()
-reader = easyocr.Reader(['en'])
+reader = easyocr.Reader(['en'], gpu=True)
 print("model time {}".format(str(time.time() - model_time)))
 # from src.utils import extract_text_easyocr
 
@@ -69,4 +69,4 @@ def main():
 
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5006)
+    app.run(host='0.0.0.0', port=5006)
