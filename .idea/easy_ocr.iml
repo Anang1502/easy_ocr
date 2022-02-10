@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/easyocr_venv" />
       <excludeFolder url="file://$MODULE_DIR$/easyocr_new_venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (easy_ocr) (2)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (easy_ocr)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

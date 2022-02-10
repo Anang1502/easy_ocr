@@ -22,6 +22,7 @@ class UserBehavior(HttpUser):
     def model(self):
         url1 = "http://localhost:5006/apidocs/#/Process_File/post_api_v1_process_file"
         # url = "http://192.168.0.48:5000/api/v1/upload"
+        # url = ""
         # document = "D:/cl_test/2019-06-12 Pristilbud Grenland Hage og Landskap.pdf"
         document1 = "C:/Users/Anang Raj/Downloads/pdfs/Nevigate_data/Nevigate_data/purchase_order/HK-PO217026_DellHK-HK-PO217026"
         files = {'file': open(document1, 'rb')}

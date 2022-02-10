@@ -7,13 +7,22 @@ import matplotlib.pyplot as plt
 from flask import Flask, request, jsonify
 from flasgger import Swagger, swag_from
 from pdf2image import convert_from_path
+
 model_time = time.time()
 reader = easyocr.Reader(['en'], gpu=True)
 print("model time {}".format(str(time.time() - model_time)))
 # from src.utils import extract_text_easyocr
+from src.logger import logger
+
+logger = logger.load_log()
 
 app = Flask(__name__, instance_path="/{cf.BASE_PATH}/instance")
 Swagger(app)
+
+
+@app.route("/", methods=["GET", "OPTIONS"])
+def hello():
+    return jsonify({"message": "Hi, welcome to ocr testing tools"})
 
 
 def convert2image(file_path, file_name):
@@ -38,11 +47,12 @@ def extract_text(file_path):
 def main():
     try:
         start_time = time.time()
+        logger.info("start time : {}".format(start_time))
         file = request.files['file']
         file_name = file.filename
         file_path = os.path.join(cf.BASE_PATH, "data", "files", file_name)
         file.save(file_path)
-        print("file is saved")
+        logger.info("file is saved")
         image_dir = convert2image(file_path, str(file.filename))
         print(len(os.listdir(image_dir)))
         c = 0
@@ -61,12 +71,12 @@ def main():
         #         cv.putText(image1, text, (tl[0], tl[1] - 10),
         #                     cv.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
         #     plt.imsave((os.path.join(cf.BASE_PATH, "data", "box_img", 'image{0}.png'.format(str(c)))), image1)
-        print("total processing time : {}".format(str(time.time() - start_time)))
-        print(result)
+        logger.info("total processing time : {}".format(str(time.time() - start_time)))
+        logger.info("result : {}".format(result))
         return jsonify({'result': "Process Completed"})
     except Exception as error:
         print(error)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5006)
+    app.run(host='localhost', port=5006)
